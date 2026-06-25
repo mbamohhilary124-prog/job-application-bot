@@ -2,10 +2,11 @@ const express = require("express");
 const fs = require("fs");
 const profile = require("./profile/profile.json");
 const jobs = require("./data/jobs.json");
-
+const jobRoutes = require("./routes/jobs");
 const app = express();
 
 app.use(express.json());
+app.use("/jobs", jobRoutes);
 
 app.get("/", (req, res) => {
     res.send(`
@@ -23,9 +24,7 @@ app.get("/profile", (req, res) => {
     res.json(profile);
 });
 
-app.get("/jobs", (req, res) => {
-    res.json(jobs);
-});
+
 
 app.get("/jobs/status/:status", (req, res) => {
     const status = req.params.status;
